@@ -1,7 +1,7 @@
 FROM pwcusadc/cicd
 
 RUN echo "Overriding Files....."
-COPY ./cicd /var/devops/cicd
+COPY ./devops/cicd /var/devops/cicd
 
 RUN \
    chmod -R +x /var/devops/cicd/*.sh && \
