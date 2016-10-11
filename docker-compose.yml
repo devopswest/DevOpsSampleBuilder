@@ -1,0 +1,49 @@
+version: '2'
+services:
+
+    cicd:
+        extends:
+           file: devops/cicd/docker-compose.yml
+           service: cicd
+        environment:
+            - 'APP_NAME=checklist'
+            - 'DEPLOY_TO_SERVER=dev'
+
+            - 'DOCKER_USER=andresfuentes'
+
+
+            - 'DOCKER_TARGET=tcp://adc-swarm-master.eastus.cloudapp.azure.com:4243'
+            - 'GIT_URL=https://github.com/andresfuentes/Checklist.git'
+            - 'HEALTH_CHECK=http://adc-swarm-master.eastus.cloudapp.azure.com:8080/management/health'
+
+            - 'RFC_CREATE_IMPLEMENTATION_API_URL=http://pirates-builder.eastus.cloudapp.azure.com:9993/api/rfc/changeImplementation'
+            - 'RFC_EVALUATION_CLOSED_API_URL=http://pirates-builder.eastus.cloudapp.azure.com:9993/api/rfc/closeWithEvaluation'
+
+
+            - 'SERVICE_ENV=prod,swagger'
+            - 'SERVICE_PORT=9090'
+            - 'SERVICE_ES_CLUSTER=elasticsearch'
+            - 'SERVICE_ES_NODE=adc-database.eastus.cloudapp.azure.com:9300'
+
+            - 'SERVICE_DB=jdbc:postgresql://adc-database.eastus.cloudapp.azure.com:5432/Checklist'
+            - 'DB_URL=adc-database.eastus.cloudapp.azure.com:5432/Checklist'
+            - 'DB_USER=postgres'
+
+
+            - 'DOCKER_PASSWORD=tresm1104'
+            - 'DB_PASSWORD=pwc123'
+
+    app:
+        extends:
+           file: devops/cicd/docker-compose.yml
+           service: builder
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: 'easydevops/builder'
+        environment:
+            - 'constraint:tier.app==true'
+            - 'affinity:container!=~*app*'
+
+
+

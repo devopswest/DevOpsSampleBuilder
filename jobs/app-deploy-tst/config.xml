@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.5.3">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>{GIt_URL}</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>sed -i &apos;s/{jenkins-project}/todo-deploy-dev/&apos; docker-compose.yml
+sed -i &apos;s/{password}/SOME_PASSWORD/&apos; docker-compose.yml
+sed -i &apos;s/{pwc-password}/SOME_PASSWORD/&apos; docker-compose.yml
+sed -i &apos;s/{hp9-password}/1qaz2wsx/&apos; docker-compose.yml
+sed -i &apos;s/{api-key}/SOME_KEY/&apos; docker-compose.yml
+sed -i &apos;s/{api-secret}/SOME_SECRET/&apos; docker-compose.yml
+sed -i &apos;s/{version}/latest/&apos; docker-compose.yml </command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>docker-compose run cicd develop</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
