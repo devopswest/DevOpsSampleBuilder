@@ -35,12 +35,14 @@ fi;
 #
 # Create Docker Image
 #
-cp docker-compose.yml ../docker-compose.yml
-sed -i 's/{version}/'"$branch"'/' ../docker-compose.yml
+cp docker-compose.yml ./docker-compose-tmp.yml
+sed -i 's/{version}/'"$branch"'/' ./docker-compose-tmp.yml
 
-cat ../docker-compose.yml
+cat ./docker-compose-tmp.yml
 
-docker-compose --file ../docker-compose.yml build $APP_BUILD_SERVICE_NAME
+docker-compose --file ./docker-compose-tmp.yml build $APP_BUILD_SERVICE_NAME
+
+rm ./docker-compose-tmp.yml
 
 imageId="$(docker images|grep $appname|head -1|awk '{print $3}')"
 
