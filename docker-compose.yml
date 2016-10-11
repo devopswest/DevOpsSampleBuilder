@@ -2,9 +2,9 @@ version: '2'
 services:
 
     cicd:
-        extends:
-           file: devops/cicd/docker-compose.yml
-           service: cicd
+        # extends:
+        #    file: devops/cicd/docker-compose.yml
+        #    service: cicd
         build:
             context: .
             dockerfile: cicd/Dockerfile
@@ -17,18 +17,18 @@ services:
             - 'DOCKER_USER=andresfuentes'
             - 'DOCKER_REPO=easydevops'
             - 'DOCKER_PASSWORD=tresm1104'
-        # volumes:
-        #     - "/var/run/docker.sock:/var/run/docker.sock"
-        #     - "/Applications/Docker.app/Contents/Resources/bin/docker:/usr/bin/docker"
-        #     - "/Applications/Docker.app/Contents/Resources/bin/docker-compose:/usr/bin/docker-compose"
-        #     - "$PWD/tmp:/var/jenkins_home"
-        #     - "$PWD:/var/app"
-        #     - "$HOME/.m2:/root/.m2"
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+            - "/usr/bin/docker:/usr/bin/docker"
+            - "/usr/bin/docker-compose:/usr/bin/docker-compose"
+            - "/var/jenkins_home:/var/jenkins_home"
+            - "$PWD:/var/app"
+            - "$HOME/.m2:/root/.m2"
 
     app:
-        extends:
-           file: devops/infrastructure/swarm/docker-compose.yml
-           service: builder
+        # extends:
+        #    file: devops/infrastructure/swarm/docker-compose.yml
+        #    service: builder
         build:
             context: .
             dockerfile: Dockerfile
