@@ -10,17 +10,17 @@ services:
             dockerfile: cicd/Dockerfile
         image: 'easydevops/cicd'
         environment:
-            - 'DOCKER_TARGET=tcp://adc-swarm-master.eastus.cloudapp.azure.com:4243'
+            - 'DOCKER_TARGET=tcp://172.10.10.20:4243'
             - 'GIT_URL=https://github.com/andresfuentes/Checklist.git'
-            - 'HEALTH_CHECK=http://adc-swarm-master.eastus.cloudapp.azure.com:8080/management/health'
+            - 'HEALTH_CHECK=tcp://172.10.10.20:8080'
             - 'DOCKER_PASSWORD=tresm1104'
-        volumes:
-            - "/var/run/docker.sock:/var/run/docker.sock"
-            - "/Applications/Docker.app/Contents/Resources/bin/docker:/usr/bin/docker"
-            - "/Applications/Docker.app/Contents/Resources/bin/docker-compose:/usr/bin/docker-compose"
-            - "$PWD:/var/jenkins_home"
-            - "$PWD:/var/app"
-            - "$HOME/.m2:/root/.m2"
+        # volumes:
+        #     - "/var/run/docker.sock:/var/run/docker.sock"
+        #     - "/Applications/Docker.app/Contents/Resources/bin/docker:/usr/bin/docker"
+        #     - "/Applications/Docker.app/Contents/Resources/bin/docker-compose:/usr/bin/docker-compose"
+        #     - "$PWD/tmp:/var/jenkins_home"
+        #     - "$PWD:/var/app"
+        #     - "$HOME/.m2:/root/.m2"
 
     app:
         extends:
@@ -31,8 +31,19 @@ services:
             dockerfile: Dockerfile
         image: 'easydevops/builder'
         environment:
-            - 'constraint:tier.app==true'
-            - 'affinity:container!=~*app*'
+            - 'DEFAULT_USERNAME=pwc'
+            - 'DEFAULT_PASSWORD=pwc!123'
+            - 'APP_NAME=checklist'
+            - 'GIT_CICD_URL=https://github.com/andresfuentes/DevOpsSampleBuilder.git'
+            - 'GIT_URL=https://github.com/andresfuentes/DevOpsSampleApp.git'
+            - 'constraint:node.role==manager'
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+            - "/usr/bin/docker:/usr/bin/docker"
+            - "/var/jenkins_home:/var/jenkins_home"
+        ports:
+            - '8080:8080'
+            - '50000:50000'
 
 
 

@@ -1,0 +1,17 @@
+{
+  "name": "builder",
+  "version": "0.0.2",
+  "description": "Builder",
+  "private": true,
+  "cacheDirectories": [
+
+  ],
+  "devDependencies": {
+    
+  },
+  "engines": {
+    "node": "^4.3"
+  },
+  "scripts": {
+  }
+}
