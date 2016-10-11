@@ -44,8 +44,8 @@ docker-compose --file ../docker-compose.yml build $APP_BUILD_SERVICE_NAME
 
 imageId="$(docker images|grep $appname|head -1|awk '{print $3}')"
 
-docker tag $imageId $DOCKER_USER/$appname:$version
-docker tag $imageId $DOCKER_USER/$appname:$branch
+docker tag $imageId $DOCKER_REPO/$appname:$version
+docker tag $imageId $DOCKER_REPO/$appname:$branch
 
 
 
@@ -53,27 +53,27 @@ docker tag $imageId $DOCKER_USER/$appname:$branch
 # Push Image to Registry
 #
 docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-#docker rmi  $DOCKER_USER/$appname
-docker push $DOCKER_USER/$appname:latest
+#docker rmi  $DOCKER_REPO/$appname
+docker push $DOCKER_REPO/$appname:latest
 
-#docker push $DOCKER_USER/$appname:$version
-#docker rmi  $DOCKER_USER/$appname:$branch
-docker push $DOCKER_USER/$appname:$branch
+#docker push $DOCKER_REPO/$appname:$version
+#docker rmi  $DOCKER_REPO/$appname:$branch
+docker push $DOCKER_REPO/$appname:$branch
 
 #if [ "$branch" = "stage" ]; then
   echo "Pushing Versioned Tags [$v1, $v2, $v3]"
 
-  docker tag $imageId  $DOCKER_USER/$appname:$v1
-  docker tag $imageId  $DOCKER_USER/$appname:$v1.$v2
-  docker tag $imageId  $DOCKER_USER/$appname:$v1.$v2.$v3
+  docker tag $imageId  $DOCKER_REPO/$appname:$v1
+  docker tag $imageId  $DOCKER_REPO/$appname:$v1.$v2
+  docker tag $imageId  $DOCKER_REPO/$appname:$v1.$v2.$v3
 
-  #docker rmi   $DOCKER_USER/$appname:$v1
-  #docker rmi   $DOCKER_USER/$appname:$v1.$v2
-  #docker rmi   $DOCKER_USER/$appname:$v1.$v2.$v3
+  #docker rmi   $DOCKER_REPO/$appname:$v1
+  #docker rmi   $DOCKER_REPO/$appname:$v1.$v2
+  #docker rmi   $DOCKER_REPO/$appname:$v1.$v2.$v3
 
-  docker push   $DOCKER_USER/$appname:$v1
-  docker push   $DOCKER_USER/$appname:$v1.$v2
-  docker push   $DOCKER_USER/$appname:$v1.$v2.$v3
+  docker push   $DOCKER_REPO/$appname:$v1
+  docker push   $DOCKER_REPO/$appname:$v1.$v2
+  docker push   $DOCKER_REPO/$appname:$v1.$v2.$v3
 #fi;
 
 echo "Docker Images on Build Server"
