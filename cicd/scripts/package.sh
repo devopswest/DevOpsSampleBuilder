@@ -24,8 +24,8 @@ v1="$(echo $version|awk -F'.' '{print $1}')"
 v2="$(echo $version|awk -F'.' '{print $2}')"
 v3="$(echo $version|awk -F'.' '{print $3}')"
 
-v1="$(echo $v1|awk '{print substr($0,2)}')"
-v3="$(echo $v3|awk -F'-' '{print $1}')"
+#v1="$(echo $v1|awk '{print substr($0,2)}')"
+#v3="$(echo $v3|awk -F'-' '{print $1}')"
 
 branch=$DEPLOY_TO_SERVER
 if [ "$branch" = "" ]; then
