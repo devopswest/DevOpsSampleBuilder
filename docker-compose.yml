@@ -12,7 +12,7 @@ services:
             - 'APP_NAME=builder'
             - 'DOCKER_USER=andresfuentes'
             - 'DOCKER_REPO=easydevops'
-            - 'DOCKER_PASSWORD=tresm1104'
+            - 'DOCKER_PASSWORD={password}'
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
             - "/usr/bin/docker:/usr/bin/docker"
@@ -28,7 +28,7 @@ services:
         image: 'easydevops/builder'
         environment:
             - 'DEFAULT_USERNAME=pwc'
-            - 'DEFAULT_PASSWORD=pwc!123'
+            - 'DEFAULT_PASSWORD={password}'
             - 'APP_NAME=checklist'
             - 'GIT_CICD_URL=https://github.com/andresfuentes/DevOpsSampleBuilder.git'
             - 'GIT_URL=https://github.com/andresfuentes/DevOpsSampleApp.git'
