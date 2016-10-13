@@ -5,7 +5,7 @@ services:
         build:
             context: .
             dockerfile: devops/cicd/Dockerfile
-        image: 'easydevops/cicd'
+        image: 'doghouze/cicd'
         environment:
             - 'DOCKER_TARGET=tcp://172.10.10.20:4243'
             - 'HEALTH_CHECK=tcp://172.10.10.20:8080'
@@ -25,7 +25,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        image: 'easydevops/builder'
+        image: 'doghouze/builder'
         environment:
             - 'DEFAULT_USERNAME=pwc'
             - 'DEFAULT_PASSWORD={password}'

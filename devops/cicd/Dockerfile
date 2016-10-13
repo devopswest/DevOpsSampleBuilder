@@ -1,4 +1,4 @@
-FROM pwcusadc/cicd
+FROM easydevops/cicd
 
 RUN echo "Overriding Files....."
 COPY ./devops/cicd /var/devops/cicd
