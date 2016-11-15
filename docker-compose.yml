@@ -10,9 +10,9 @@ services:
             - 'DOCKER_TARGET=tcp://adc-tst-swarm-master.eastus.cloudapp.azure.com:4243'
             - 'HEALTH_CHECK=tcp://adc-tst-swarm-master.eastus.cloudapp.azure.com:8080'
             - 'APP_NAME=builder'
-            - 'DOCKER_USER=andresfuentes'
+            - 'DOCKER_USER={docker-user}'
             - 'DOCKER_REPO=easydevops'
-            - 'DOCKER_PASSWORD={password}'
+            - 'DOCKER_PASSWORD={docker-app-key}'
         volumes:
             - "/var/run/docker.sock:/var/run/docker.sock"
             - "/usr/bin/docker:/usr/bin/docker"
