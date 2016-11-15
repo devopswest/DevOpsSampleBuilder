@@ -8,7 +8,7 @@ services:
         image: 'doghouze/cicd'
         environment:
             - 'DOCKER_TARGET=tcp://adc-tst-swarm-master.eastus.cloudapp.azure.com:4243'
-            - 'HEALTH_CHECK=tcp://adc-tst-swarm-master.eastus.cloudapp.azure.com:8080'
+            - 'HEALTH_CHECK=http://adc-tst-swarm-master.eastus.cloudapp.azure.com:8080'
             - 'APP_NAME=builder'
             - 'DOCKER_USER=andresfuentes'
             - 'DOCKER_REPO=easydevops'
