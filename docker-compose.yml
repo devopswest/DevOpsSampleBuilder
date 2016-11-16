@@ -9,7 +9,7 @@ services:
         environment:
             - 'DOCKER_TARGET=tcp://adc-tst-swarm-master.eastus.cloudapp.azure.com:4243'
             - 'HEALTH_CHECK=http://adc-tst-swarm-master.eastus.cloudapp.azure.com:8080'
-            - 'APP_NAME=testing'
+            - 'APP_NAME=builder'
             - 'DOCKER_USER=andresfuentes'
             - 'DOCKER_REPO=easydevops'
             - 'DOCKER_PASSWORD={password}'
