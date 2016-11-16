@@ -40,7 +40,8 @@ sed -i 's/{version}/'"$branch"'/' ./docker-compose-tmp.yml
 
 cat ./docker-compose-tmp.yml
 
-echo "Image Name:" $APP_BUILD_SERVICE_NAME
+echo "*************************************** $APP_BUILD_SERVICE_NAME"
+
 docker-compose --file ./docker-compose-tmp.yml build $APP_BUILD_SERVICE_NAME
  
 rm ./docker-compose-tmp.yml
