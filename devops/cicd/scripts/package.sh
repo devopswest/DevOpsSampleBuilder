@@ -8,6 +8,7 @@ echo "***************************************"
 
 appname=$APP_NAME
 
+echo "**** $appname ****"
 
 #
 # for NPM Builds
